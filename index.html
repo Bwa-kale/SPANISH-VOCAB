@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>LEXICON // ES</title>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lexicon">
+<meta name="theme-color" content="#05060a">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2305060a'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%2300ffc8' font-family='Arial' font-weight='bold'%3E%C3%91%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #05060a;
+    --panel: rgba(255,255,255,0.035);
+    --panel-border: rgba(255,255,255,0.08);
+    --neon: #00ffc8;
+    --violet: #a855f7;
+    --gold: #ffd166;
+    --red: #ff5c7a;
+    --text: #eef0f5;
+    --text-dim: #8a90a3;
+    --text-faint: #565c70;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden;}
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(0,255,200,0.07), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(168,85,247,0.08), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(255,209,102,0.04), transparent 50%),
+      linear-gradient(180deg, #05060a 0%, #07080f 100%);
+    padding-bottom: 100px;
+  }
+  .wrap{max-width:560px; margin:0 auto; padding: 22px 18px 10px;}
+
+  /* HEADER */
+  .header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .brand .mark{font-family:'Orbitron',sans-serif; font-weight:900; font-size:20px; letter-spacing:1.5px; color:var(--text); display:flex; align-items:center; gap:8px;}
+  .brand .mark span{color:var(--neon); text-shadow: 0 0 18px rgba(0,255,200,0.6);}
+  .brand .sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--text-faint); letter-spacing:1.5px; margin-top:3px;}
+  .countbadge{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); border:1px solid rgba(255,209,102,0.35); background:rgba(255,209,102,0.06); padding:5px 9px; border-radius:20px; letter-spacing:0.5px; white-space:nowrap;}
+
+  /* CARD */
+  .card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:16px;
+    backdrop-filter: blur(20px);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  }
+  .card-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:2px; color:var(--text-faint); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;}
+  .card-label .dot{width:6px; height:6px; border-radius:50%; background:var(--neon); box-shadow:0 0 8px var(--neon); display:inline-block; margin-right:6px;}
+
+  /* CAPTURE FORM */
+  textarea.phrase-field{
+    width:100%; background:transparent; border:none; outline:none; resize:none;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:20px; color:var(--text);
+    line-height:1.4; padding:0; min-height:54px;
+  }
+  textarea.phrase-field::placeholder{color:var(--text-faint); font-weight:500;}
+  .field-row{margin-top:14px;}
+  .field-label{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint); letter-spacing:1px; margin-bottom:6px; text-transform:uppercase;}
+  input.small-input, textarea.small-input{
+    width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--panel-border);
+    border-radius:10px; padding:10px 12px; color:var(--text); font-family:'Inter',sans-serif;
+    font-size:14.5px; outline:none; resize:none;
+  }
+  input.small-input:focus, textarea.small-input:focus{border-color:rgba(0,255,200,0.4);}
+  .tag-row{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
+  .tag-btn{
+    padding:7px 13px; border-radius:20px; border:1px solid var(--panel-border);
+    background:rgba(255,255,255,0.02); font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--text-dim); cursor:pointer; transition: all 0.15s ease; letter-spacing:0.3px;
+  }
+  .tag-btn.active{background:rgba(0,255,200,0.1); border-color:rgba(0,255,200,0.5); color:var(--neon); box-shadow:0 0 12px rgba(0,255,200,0.15); font-weight:600;}
+
+  .save-btn{
+    width:100%; margin-top:16px; padding:14px; border-radius:14px; border:none;
+    background:linear-gradient(135deg, rgba(0,255,200,0.18), rgba(0,255,200,0.08));
+    border:1px solid rgba(0,255,200,0.4);
+    color:var(--neon); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px;
+    letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
+    box-shadow: 0 0 20px rgba(0,255,200,0.1);
+    transition: all 0.15s ease;
+  }
+  .save-btn:active{transform: scale(0.98);}
+  .save-btn:disabled{opacity:0.35; box-shadow:none; cursor:default;}
+
+  /* SEARCH / FILTER */
+  .search-row{display:flex; gap:8px; margin-bottom:14px;}
+  .search-input{
+    flex:1; background:var(--panel); border:1px solid var(--panel-border); border-radius:14px;
+    padding:12px 14px; color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none;
+  }
+  .search-input:focus{border-color:rgba(0,255,200,0.35);}
+  .search-input::placeholder{color:var(--text-faint);}
+
+  .filter-row{display:flex; gap:8px; margin-bottom:14px; overflow-x:auto; padding-bottom:2px;}
+  .filter-row::-webkit-scrollbar{display:none;}
+  .filter-chip{
+    flex-shrink:0; padding:7px 14px; border-radius:20px; border:1px solid var(--panel-border);
+    background:rgba(255,255,255,0.02); font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--text-dim); cursor:pointer; white-space:nowrap;
+  }
+  .filter-chip.active{background:rgba(0,255,200,0.1); border-color:rgba(0,255,200,0.5); color:var(--neon);}
+
+  /* PHRASE ENTRIES */
+  .entry-list{display:flex; flex-direction:column; gap:10px;}
+  .entry{
+    background:var(--panel); border:1px solid var(--panel-border); border-radius:16px;
+    padding:16px; position:relative; overflow:hidden;
+  }
+  .entry::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  }
+  .entry-phrase{font-family:'Inter',sans-serif; font-weight:700; font-size:18px; color:var(--text); line-height:1.35;}
+  .entry-translation{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--neon); margin-top:6px; opacity:0.85;}
+  .entry-context{font-family:'Inter',sans-serif; font-size:12.5px; color:var(--text-dim); margin-top:8px; line-height:1.5; font-style:italic;}
+  .entry-meta{display:flex; align-items:center; justify-content:space-between; margin-top:12px;}
+  .entry-tag{
+    font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.8px; text-transform:uppercase;
+    padding:4px 9px; border-radius:10px; display:inline-block;
+  }
+  .entry-tag.heard{background:rgba(168,85,247,0.12); color:#c896ff;}
+  .entry-tag.grammar{background:rgba(255,209,102,0.12); color:var(--gold);}
+  .entry-tag.slang{background:rgba(255,92,122,0.12); color:var(--red);}
+  .entry-tag.vocab{background:rgba(0,255,200,0.12); color:var(--neon);}
+  .entry-date{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint);}
+  .entry-actions{display:flex; gap:10px; align-items:center;}
+  .delete-btn{
+    font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint);
+    background:none; border:none; cursor:pointer; padding:4px 6px;
+  }
+  .delete-btn:hover{color:var(--red);}
+
+  /* EMPTY STATE */
+  .empty-state{text-align:center; padding:50px 20px;}
+  .empty-state .icon{font-size:36px; margin-bottom:14px; opacity:0.4;}
+  .empty-state .msg{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-faint); line-height:1.7; letter-spacing:0.3px;}
+
+  .streak-strip{display:flex; gap:18px; margin-top:2px;}
+  .streak-item{text-align:center; flex:1;}
+  .streak-item .v{font-family:'Orbitron',sans-serif; font-weight:900; font-size:24px; color:var(--neon); text-shadow:0 0 14px rgba(0,255,200,0.3);}
+  .streak-item .l{font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-faint); letter-spacing:1px; margin-top:3px; text-transform:uppercase;}
+
+  ::selection{background: rgba(0,255,200,0.3);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="brand">
+      <div class="mark">LEXICO<span>N</span></div>
+      <div class="sub">SPANISH // FIELD NOTES</div>
+    </div>
+    <div class="countbadge" id="countBadge">0 PHRASES</div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="card" id="statsCard" style="display:none;">
+    <div class="streak-strip">
+      <div class="streak-item"><div class="v" id="totalCount">0</div><div class="l">Total</div></div>
+      <div class="streak-item"><div class="v" id="weekCount">0</div><div class="l">This Week</div></div>
+      <div class="streak-item"><div class="v" id="todayCount">0</div><div class="l">Today</div></div>
+    </div>
+  </div>
+
+  <!-- CAPTURE CARD -->
+  <div class="card">
+    <div class="card-label"><span><span class="dot"></span>NEW PHRASE</span></div>
+    <textarea class="phrase-field" id="phraseInput" placeholder="¿Qué onda?" rows="2"></textarea>
+
+    <div class="field-row">
+      <div class="field-label">Translation / Meaning</div>
+      <input type="text" class="small-input" id="translationInput" placeholder="What's up?">
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Where you heard it / context (optional)</div>
+      <textarea class="small-input" id="contextInput" placeholder="Heard at the panadería in Bogotá" rows="2"></textarea>
+    </div>
+
+    <div class="tag-row" id="tagRow">
+      <div class="tag-btn active" data-tag="vocab">VOCAB</div>
+      <div class="tag-btn" data-tag="heard">OVERHEARD</div>
+      <div class="tag-btn" data-tag="grammar">GRAMMAR</div>
+      <div class="tag-btn" data-tag="slang">SLANG</div>
+    </div>
+
+    <button class="save-btn" id="saveBtn">+ Add to Lexicon</button>
+  </div>
+
+  <!-- SEARCH -->
+  <input type="text" class="search-input" id="searchInput" placeholder="Search your phrases...">
+
+  <div class="filter-row" id="filterRow">
+    <div class="filter-chip active" data-filter="all">All</div>
+    <div class="filter-chip" data-filter="vocab">Vocab</div>
+    <div class="filter-chip" data-filter="heard">Overheard</div>
+    <div class="filter-chip" data-filter="grammar">Grammar</div>
+    <div class="filter-chip" data-filter="slang">Slang</div>
+  </div>
+
+  <!-- ENTRIES -->
+  <div class="entry-list" id="entryList"></div>
+
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="icon">📓</div>
+    <div class="msg">Your lexicon is empty.<br>Catch a phrase, write it down, repeat it later.</div>
+  </div>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'lexicon_es_phrases';
+
+let entries = [];
+let activeTag = 'vocab';
+let activeFilter = 'all';
+
+function loadEntries(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    entries = raw ? JSON.parse(raw) : [];
+  }catch(e){
+    entries = [];
+  }
+}
+function saveEntries(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
+const els = {
+  phraseInput: document.getElementById('phraseInput'),
+  translationInput: document.getElementById('translationInput'),
+  contextInput: document.getElementById('contextInput'),
+  saveBtn: document.getElementById('saveBtn'),
+  searchInput: document.getElementById('searchInput'),
+  entryList: document.getElementById('entryList'),
+  emptyState: document.getElementById('emptyState'),
+  countBadge: document.getElementById('countBadge'),
+  statsCard: document.getElementById('statsCard'),
+  totalCount: document.getElementById('totalCount'),
+  weekCount: document.getElementById('weekCount'),
+  todayCount: document.getElementById('todayCount'),
+};
+
+document.querySelectorAll('#tagRow .tag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tagRow .tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTag = btn.dataset.tag;
+  });
+});
+
+document.querySelectorAll('#filterRow .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#filterRow .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    render();
+  });
+});
+
+els.saveBtn.addEventListener('click', () => {
+  const phrase = els.phraseInput.value.trim();
+  const translation = els.translationInput.value.trim();
+  const context = els.contextInput.value.trim();
+  if(!phrase) return;
+
+  entries.unshift({
+    id: Date.now(),
+    phrase,
+    translation,
+    context,
+    tag: activeTag,
+    createdAt: new Date().toISOString(),
+  });
+
+  saveEntries();
+  els.phraseInput.value = '';
+  els.translationInput.value = '';
+  els.contextInput.value = '';
+  render();
+  els.phraseInput.focus();
+});
+
+els.searchInput.addEventListener('input', render);
+
+function deleteEntry(id){
+  entries = entries.filter(e => e.id !== id);
+  saveEntries();
+  render();
+}
+
+function fmtDate(iso){
+  const d = new Date(iso);
+  const now = new Date();
+  const isToday = d.toDateString() === now.toDateString();
+  const yesterday = new Date(now); yesterday.setDate(now.getDate()-1);
+  const isYesterday = d.toDateString() === yesterday.toDateString();
+  if(isToday) return 'Today';
+  if(isYesterday) return 'Yesterday';
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year: d.getFullYear() !== now.getFullYear() ? 'numeric' : undefined});
+}
+
+function tagLabel(tag){
+  return {vocab:'Vocab', heard:'Overheard', grammar:'Grammar', slang:'Slang'}[tag] || tag;
+}
+
+function render(){
+  const query = els.searchInput.value.trim().toLowerCase();
+
+  let filtered = entries;
+  if(activeFilter !== 'all'){
+    filtered = filtered.filter(e => e.tag === activeFilter);
+  }
+  if(query){
+    filtered = filtered.filter(e =>
+      e.phrase.toLowerCase().includes(query) ||
+      (e.translation && e.translation.toLowerCase().includes(query)) ||
+      (e.context && e.context.toLowerCase().includes(query))
+    );
+  }
+
+  els.countBadge.textContent = entries.length + (entries.length === 1 ? ' PHRASE' : ' PHRASES');
+
+  if(entries.length === 0){
+    els.statsCard.style.display = 'none';
+  } else {
+    els.statsCard.style.display = 'block';
+    const now = new Date();
+    const weekAgo = new Date(now); weekAgo.setDate(now.getDate()-7);
+    els.totalCount.textContent = entries.length;
+    els.weekCount.textContent = entries.filter(e => new Date(e.createdAt) >= weekAgo).length;
+    els.todayCount.textContent = entries.filter(e => new Date(e.createdAt).toDateString() === now.toDateString()).length;
+  }
+
+  if(filtered.length === 0){
+    els.entryList.innerHTML = '';
+    els.emptyState.style.display = 'block';
+    els.emptyState.querySelector('.msg').innerHTML = entries.length === 0
+      ? 'Your lexicon is empty.<br>Catch a phrase, write it down, repeat it later.'
+      : 'No phrases match.<br>Try a different search or filter.';
+    return;
+  }
+  els.emptyState.style.display = 'none';
+
+  els.entryList.innerHTML = filtered.map(e => `
+    <div class="entry">
+      <div class="entry-phrase">${escapeHtml(e.phrase)}</div>
+      ${e.translation ? `<div class="entry-translation">${escapeHtml(e.translation)}</div>` : ''}
+      ${e.context ? `<div class="entry-context">${escapeHtml(e.context)}</div>` : ''}
+      <div class="entry-meta">
+        <div class="entry-actions">
+          <span class="entry-tag ${e.tag}">${tagLabel(e.tag)}</span>
+          <span class="entry-date">${fmtDate(e.createdAt)}</span>
+        </div>
+        <button class="delete-btn" onclick="deleteEntry(${e.id})">DELETE</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+loadEntries();
+render();
+</script>
+
+</body>
+</html>
