@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Lexicon">
 <meta name="theme-color" content="#05060a">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2305060a'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%2300ffc8' font-family='Arial' font-weight='bold'%3E%C3%91%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2305060a'/%3E%3Ctext x='50' y='65' font-size='46' text-anchor='middle' fill='%2300ffc8' font-family='Arial' font-weight='bold'%3E%C3%91%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
     --panel: rgba(255,255,255,0.035);
     --panel-border: rgba(255,255,255,0.08);
     --neon: #00ffc8;
-    --violet: #a855f7;
     --gold: #ffd166;
+    --violet: #a855f7;
     --red: #ff5c7a;
     --text: #eef0f5;
     --text-dim: #8a90a3;
@@ -32,130 +32,101 @@
   body{
     background:
       radial-gradient(circle at 15% 0%, rgba(0,255,200,0.07), transparent 45%),
-      radial-gradient(circle at 85% 15%, rgba(168,85,247,0.08), transparent 45%),
-      radial-gradient(circle at 50% 100%, rgba(255,209,102,0.04), transparent 50%),
+      radial-gradient(circle at 85% 15%, rgba(168,85,247,0.07), transparent 45%),
       linear-gradient(180deg, #05060a 0%, #07080f 100%);
-    padding-bottom: 100px;
+    padding-bottom: 90px;
   }
   .wrap{max-width:560px; margin:0 auto; padding: 22px 18px 10px;}
 
-  /* HEADER */
   .header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
   .brand .mark{font-family:'Orbitron',sans-serif; font-weight:900; font-size:20px; letter-spacing:1.5px; color:var(--text); display:flex; align-items:center; gap:8px;}
   .brand .mark span{color:var(--neon); text-shadow: 0 0 18px rgba(0,255,200,0.6);}
   .brand .sub{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--text-faint); letter-spacing:1.5px; margin-top:3px;}
   .countbadge{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); border:1px solid rgba(255,209,102,0.35); background:rgba(255,209,102,0.06); padding:5px 9px; border-radius:20px; letter-spacing:0.5px; white-space:nowrap;}
 
-  /* CARD */
   .card{
-    background:var(--panel);
-    border:1px solid var(--panel-border);
-    border-radius:18px;
-    padding:18px;
-    margin-bottom:16px;
-    backdrop-filter: blur(20px);
-    position:relative;
-    overflow:hidden;
+    background:var(--panel); border:1px solid var(--panel-border); border-radius:18px;
+    padding:18px; margin-bottom:16px; backdrop-filter: blur(20px); position:relative; overflow:hidden;
   }
-  .card::before{
-    content:''; position:absolute; top:0; left:0; right:0; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  }
-  .card-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:2px; color:var(--text-faint); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;}
+  .card::before{content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);}
+  .card-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:2px; color:var(--text-faint); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center;}
   .card-label .dot{width:6px; height:6px; border-radius:50%; background:var(--neon); box-shadow:0 0 8px var(--neon); display:inline-block; margin-right:6px;}
 
-  /* CAPTURE FORM */
-  textarea.phrase-field{
-    width:100%; background:transparent; border:none; outline:none; resize:none;
-    font-family:'Inter',sans-serif; font-weight:600; font-size:20px; color:var(--text);
-    line-height:1.4; padding:0; min-height:54px;
-  }
-  textarea.phrase-field::placeholder{color:var(--text-faint); font-weight:500;}
-  .field-row{margin-top:14px;}
   .field-label{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint); letter-spacing:1px; margin-bottom:6px; text-transform:uppercase;}
-  input.small-input, textarea.small-input{
+  textarea, input.entryfield{
     width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--panel-border);
-    border-radius:10px; padding:10px 12px; color:var(--text); font-family:'Inter',sans-serif;
-    font-size:14.5px; outline:none; resize:none;
+    border-radius:12px; padding:12px 14px; color:var(--text); font-family:'Inter',sans-serif;
+    font-size:16px; outline:none; resize:none; line-height:1.4;
   }
-  input.small-input:focus, textarea.small-input:focus{border-color:rgba(0,255,200,0.4);}
+  textarea:focus, input.entryfield:focus{border-color:rgba(0,255,200,0.4);}
+  .es-field{font-weight:600; font-size:18px; margin-bottom:12px;}
+  .en-field{color:var(--text-dim); font-size:14px;}
+  textarea{min-height:46px; max-height:140px;}
+
   .tag-row{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
   .tag-btn{
     padding:7px 13px; border-radius:20px; border:1px solid var(--panel-border);
     background:rgba(255,255,255,0.02); font-family:'JetBrains Mono',monospace; font-size:11px;
-    color:var(--text-dim); cursor:pointer; transition: all 0.15s ease; letter-spacing:0.3px;
+    color:var(--text-dim); cursor:pointer; transition: all 0.15s ease;
   }
-  .tag-btn.active{background:rgba(0,255,200,0.1); border-color:rgba(0,255,200,0.5); color:var(--neon); box-shadow:0 0 12px rgba(0,255,200,0.15); font-weight:600;}
+  .tag-btn.active{background:rgba(0,255,200,0.1); border-color:rgba(0,255,200,0.5); color:var(--neon); font-weight:600;}
 
   .save-btn{
-    width:100%; margin-top:16px; padding:14px; border-radius:14px; border:none;
+    width:100%; margin-top:14px; padding:14px; border-radius:14px; border:none;
     background:linear-gradient(135deg, rgba(0,255,200,0.18), rgba(0,255,200,0.08));
-    border:1px solid rgba(0,255,200,0.4);
-    color:var(--neon); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px;
-    letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
-    box-shadow: 0 0 20px rgba(0,255,200,0.1);
-    transition: all 0.15s ease;
+    border:1px solid rgba(0,255,200,0.4); color:var(--neon); font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:13px; letter-spacing:1.5px; cursor:pointer; text-transform:uppercase;
   }
-  .save-btn:active{transform: scale(0.98);}
-  .save-btn:disabled{opacity:0.35; box-shadow:none; cursor:default;}
+  .save-btn:active{transform:scale(0.98);}
+  .save-btn:disabled{opacity:0.35; pointer-events:none;}
 
-  /* SEARCH / FILTER */
   .search-row{display:flex; gap:8px; margin-bottom:14px;}
   .search-input{
-    flex:1; background:var(--panel); border:1px solid var(--panel-border); border-radius:14px;
-    padding:12px 14px; color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none;
+    flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--panel-border);
+    border-radius:12px; padding:10px 14px; color:var(--text); font-family:'Inter',sans-serif;
+    font-size:14px; outline:none;
   }
-  .search-input:focus{border-color:rgba(0,255,200,0.35);}
-  .search-input::placeholder{color:var(--text-faint);}
+  .search-input:focus{border-color:rgba(0,255,200,0.4);}
 
-  .filter-row{display:flex; gap:8px; margin-bottom:14px; overflow-x:auto; padding-bottom:2px;}
-  .filter-row::-webkit-scrollbar{display:none;}
+  .filter-row{display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap;}
   .filter-chip{
-    flex-shrink:0; padding:7px 14px; border-radius:20px; border:1px solid var(--panel-border);
-    background:rgba(255,255,255,0.02); font-family:'JetBrains Mono',monospace; font-size:11px;
-    color:var(--text-dim); cursor:pointer; white-space:nowrap;
+    padding:6px 12px; border-radius:16px; border:1px solid var(--panel-border);
+    background:rgba(255,255,255,0.02); font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    color:var(--text-faint); cursor:pointer;
   }
-  .filter-chip.active{background:rgba(0,255,200,0.1); border-color:rgba(0,255,200,0.5); color:var(--neon);}
+  .filter-chip.active{background:rgba(168,85,247,0.12); border-color:rgba(168,85,247,0.5); color:#c896ff;}
 
-  /* PHRASE ENTRIES */
-  .entry-list{display:flex; flex-direction:column; gap:10px;}
   .entry{
-    background:var(--panel); border:1px solid var(--panel-border); border-radius:16px;
-    padding:16px; position:relative; overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,0.05); padding:14px 0; position:relative;
   }
-  .entry::before{
-    content:''; position:absolute; top:0; left:0; right:0; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  .entry:last-child{border-bottom:none;}
+  .entry .es{font-size:17px; font-weight:600; color:var(--text); line-height:1.35;}
+  .entry .en{font-size:13.5px; color:var(--text-dim); margin-top:4px; line-height:1.35;}
+  .entry .meta{display:flex; align-items:center; gap:8px; margin-top:8px;}
+  .entry .tagchip{font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--neon); background:rgba(0,255,200,0.08); border:1px solid rgba(0,255,200,0.25); padding:3px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:0.5px;}
+  .entry .date{font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--text-faint);}
+  .entry .del-btn{
+    position:absolute; top:14px; right:0; background:none; border:none; color:var(--text-faint);
+    font-size:16px; cursor:pointer; padding:4px 8px; line-height:1;
   }
-  .entry-phrase{font-family:'Inter',sans-serif; font-weight:700; font-size:18px; color:var(--text); line-height:1.35;}
-  .entry-translation{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--neon); margin-top:6px; opacity:0.85;}
-  .entry-context{font-family:'Inter',sans-serif; font-size:12.5px; color:var(--text-dim); margin-top:8px; line-height:1.5; font-style:italic;}
-  .entry-meta{display:flex; align-items:center; justify-content:space-between; margin-top:12px;}
-  .entry-tag{
-    font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.8px; text-transform:uppercase;
-    padding:4px 9px; border-radius:10px; display:inline-block;
-  }
-  .entry-tag.heard{background:rgba(168,85,247,0.12); color:#c896ff;}
-  .entry-tag.grammar{background:rgba(255,209,102,0.12); color:var(--gold);}
-  .entry-tag.slang{background:rgba(255,92,122,0.12); color:var(--red);}
-  .entry-tag.vocab{background:rgba(0,255,200,0.12); color:var(--neon);}
-  .entry-date{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint);}
-  .entry-actions{display:flex; gap:10px; align-items:center;}
-  .delete-btn{
-    font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint);
-    background:none; border:none; cursor:pointer; padding:4px 6px;
-  }
-  .delete-btn:hover{color:var(--red);}
+  .entry .del-btn:active{color:var(--red);}
 
-  /* EMPTY STATE */
-  .empty-state{text-align:center; padding:50px 20px;}
-  .empty-state .icon{font-size:36px; margin-bottom:14px; opacity:0.4;}
-  .empty-state .msg{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-faint); line-height:1.7; letter-spacing:0.3px;}
+  .empty-state{text-align:center; padding:40px 10px; color:var(--text-faint);}
+  .empty-state .ic{font-size:32px; margin-bottom:10px; opacity:0.5;}
+  .empty-state .txt{font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.6;}
 
-  .streak-strip{display:flex; gap:18px; margin-top:2px;}
-  .streak-item{text-align:center; flex:1;}
-  .streak-item .v{font-family:'Orbitron',sans-serif; font-weight:900; font-size:24px; color:var(--neon); text-shadow:0 0 14px rgba(0,255,200,0.3);}
-  .streak-item .l{font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-faint); letter-spacing:1px; margin-top:3px; text-transform:uppercase;}
+  .stat-row{display:flex; gap:14px; margin-top:4px;}
+  .stat-item{text-align:center; flex:1;}
+  .stat-num{font-family:'Orbitron',sans-serif; font-weight:900; font-size:24px; color:var(--neon);}
+  .stat-lbl{font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-faint); letter-spacing:1px; margin-top:2px;}
+
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:rgba(0,255,200,0.12); border:1px solid rgba(0,255,200,0.4); color:var(--neon);
+    font-family:'JetBrains Mono',monospace; font-size:12px; padding:10px 18px; border-radius:30px;
+    opacity:0; transition: all 0.25s ease; pointer-events:none; backdrop-filter: blur(10px); white-space:nowrap;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
   ::selection{background: rgba(0,255,200,0.3);}
 </style>
@@ -166,216 +137,315 @@
 
   <div class="header">
     <div class="brand">
-      <div class="mark">LEXICO<span>N</span></div>
-      <div class="sub">SPANISH // FIELD NOTES</div>
+      <div class="mark">LEXICON<span>ES</span></div>
+      <div class="sub">SPANISH // PERSONAL LOG</div>
     </div>
-    <div class="countbadge" id="countBadge">0 PHRASES</div>
+    <div class="countbadge" id="entryCount">0 PHRASES</div>
   </div>
 
-  <!-- STATS STRIP -->
-  <div class="card" id="statsCard" style="display:none;">
-    <div class="streak-strip">
-      <div class="streak-item"><div class="v" id="totalCount">0</div><div class="l">Total</div></div>
-      <div class="streak-item"><div class="v" id="weekCount">0</div><div class="l">This Week</div></div>
-      <div class="streak-item"><div class="v" id="todayCount">0</div><div class="l">Today</div></div>
-    </div>
-  </div>
-
-  <!-- CAPTURE CARD -->
+  <!-- ADD ENTRY -->
   <div class="card">
-    <div class="card-label"><span><span class="dot"></span>NEW PHRASE</span></div>
-    <textarea class="phrase-field" id="phraseInput" placeholder="¿Qué onda?" rows="2"></textarea>
-
-    <div class="field-row">
-      <div class="field-label">Translation / Meaning</div>
-      <input type="text" class="small-input" id="translationInput" placeholder="What's up?">
-    </div>
-
-    <div class="field-row">
-      <div class="field-label">Where you heard it / context (optional)</div>
-      <textarea class="small-input" id="contextInput" placeholder="Heard at the panadería in Bogotá" rows="2"></textarea>
-    </div>
+    <div class="card-label"><span class="dot"></span>NEW PHRASE</div>
+    <div class="field-label">Spanish</div>
+    <textarea class="entryfield es-field" id="esInput" placeholder="¿Cómo se dice...?" rows="1"></textarea>
+    <div class="field-label" style="margin-top:12px;">English meaning</div>
+    <textarea class="entryfield en-field" id="enInput" placeholder="What it means" rows="1"></textarea>
 
     <div class="tag-row" id="tagRow">
-      <div class="tag-btn active" data-tag="vocab">VOCAB</div>
-      <div class="tag-btn" data-tag="heard">OVERHEARD</div>
-      <div class="tag-btn" data-tag="grammar">GRAMMAR</div>
-      <div class="tag-btn" data-tag="slang">SLANG</div>
+      <div class="tag-btn active" data-tag="general">General</div>
+      <div class="tag-btn" data-tag="travel">Travel</div>
+      <div class="tag-btn" data-tag="food">Food</div>
+      <div class="tag-btn" data-tag="slang">Slang</div>
+      <div class="tag-btn" data-tag="work">Work</div>
     </div>
 
-    <button class="save-btn" id="saveBtn">+ Add to Lexicon</button>
+    <button class="save-btn" id="saveBtn" disabled>+ Save Phrase</button>
   </div>
 
-  <!-- SEARCH -->
-  <input type="text" class="search-input" id="searchInput" placeholder="Search your phrases...">
-
-  <div class="filter-row" id="filterRow">
-    <div class="filter-chip active" data-filter="all">All</div>
-    <div class="filter-chip" data-filter="vocab">Vocab</div>
-    <div class="filter-chip" data-filter="heard">Overheard</div>
-    <div class="filter-chip" data-filter="grammar">Grammar</div>
-    <div class="filter-chip" data-filter="slang">Slang</div>
+  <!-- STATS -->
+  <div class="card" id="statsCard" style="display:none;">
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">TOTAL</div></div>
+      <div class="stat-item"><div class="stat-num" id="statWeek">0</div><div class="stat-lbl">THIS WEEK</div></div>
+      <div class="stat-item"><div class="stat-num" id="statStreak">0</div><div class="stat-lbl">DAY STREAK</div></div>
+    </div>
   </div>
 
-  <!-- ENTRIES -->
-  <div class="entry-list" id="entryList"></div>
-
-  <div class="empty-state" id="emptyState" style="display:none;">
-    <div class="icon">📓</div>
-    <div class="msg">Your lexicon is empty.<br>Catch a phrase, write it down, repeat it later.</div>
+  <!-- LIST -->
+  <div class="card">
+    <div class="card-label"><span class="dot"></span>YOUR PHRASES</div>
+    <div class="search-row">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search your phrases...">
+    </div>
+    <div class="filter-row" id="filterRow">
+      <div class="filter-chip active" data-filter="all">All</div>
+      <div class="filter-chip" data-filter="general">General</div>
+      <div class="filter-chip" data-filter="travel">Travel</div>
+      <div class="filter-chip" data-filter="food">Food</div>
+      <div class="filter-chip" data-filter="slang">Slang</div>
+      <div class="filter-chip" data-filter="work">Work</div>
+    </div>
+    <div id="entriesList"></div>
   </div>
 
 </div>
 
+<div class="toast" id="toast">Saved</div>
+
 <script>
-const STORAGE_KEY = 'lexicon_es_phrases';
-
 let entries = [];
-let activeTag = 'vocab';
-let activeFilter = 'all';
-
-function loadEntries(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    entries = raw ? JSON.parse(raw) : [];
-  }catch(e){
-    entries = [];
-  }
-}
-function saveEntries(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-}
+let currentTag = 'general';
+let currentFilter = 'all';
+let loaded = false;
 
 const els = {
-  phraseInput: document.getElementById('phraseInput'),
-  translationInput: document.getElementById('translationInput'),
-  contextInput: document.getElementById('contextInput'),
+  esInput: document.getElementById('esInput'),
+  enInput: document.getElementById('enInput'),
   saveBtn: document.getElementById('saveBtn'),
+  entriesList: document.getElementById('entriesList'),
+  entryCount: document.getElementById('entryCount'),
   searchInput: document.getElementById('searchInput'),
-  entryList: document.getElementById('entryList'),
-  emptyState: document.getElementById('emptyState'),
-  countBadge: document.getElementById('countBadge'),
+  toast: document.getElementById('toast'),
   statsCard: document.getElementById('statsCard'),
-  totalCount: document.getElementById('totalCount'),
-  weekCount: document.getElementById('weekCount'),
-  todayCount: document.getElementById('todayCount'),
+  statTotal: document.getElementById('statTotal'),
+  statWeek: document.getElementById('statWeek'),
+  statStreak: document.getElementById('statStreak'),
 };
 
-document.querySelectorAll('#tagRow .tag-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#tagRow .tag-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeTag = btn.dataset.tag;
-  });
+function autoGrow(el){
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+[els.esInput, els.enInput].forEach(el => {
+  el.addEventListener('input', () => { autoGrow(el); validateForm(); });
 });
 
-document.querySelectorAll('#filterRow .filter-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    document.querySelectorAll('#filterRow .filter-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    activeFilter = chip.dataset.filter;
-    render();
-  });
+document.getElementById('tagRow').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tag-btn');
+  if(!btn) return;
+  document.querySelectorAll('#tagRow .tag-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTag = btn.dataset.tag;
 });
 
-els.saveBtn.addEventListener('click', () => {
-  const phrase = els.phraseInput.value.trim();
-  const translation = els.translationInput.value.trim();
-  const context = els.contextInput.value.trim();
-  if(!phrase) return;
+document.getElementById('filterRow').addEventListener('click', (e) => {
+  const chip = e.target.closest('.filter-chip');
+  if(!chip) return;
+  document.querySelectorAll('#filterRow .filter-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  currentFilter = chip.dataset.filter;
+  renderList();
+});
 
-  entries.unshift({
-    id: Date.now(),
-    phrase,
-    translation,
-    context,
-    tag: activeTag,
+els.searchInput.addEventListener('input', renderList);
+
+function validateForm(){
+  els.saveBtn.disabled = els.esInput.value.trim().length === 0;
+}
+
+function showToast(msg){
+  els.toast.textContent = msg;
+  els.toast.classList.add('show');
+  setTimeout(() => els.toast.classList.remove('show'), 1600);
+}
+
+const SEED_PHRASES = [
+  // Getting a table
+  { es: "Una mesa para uno, por favor.", en: "A table for one, please.", tag: "travel" },
+  { es: "Una mesa para dos, por favor.", en: "A table for two, please.", tag: "travel" },
+  { es: "¿Tienen mesa disponible ahora?", en: "Do you have a table available now?", tag: "travel" },
+  { es: "¿Cuánto tiempo hay que esperar?", en: "How long is the wait?", tag: "travel" },
+  { es: "¿Puedo sentarme afuera?", en: "Can I sit outside?", tag: "travel" },
+
+  // Ordering food
+  { es: "¿Qué me recomienda?", en: "What do you recommend?", tag: "food" },
+  { es: "¿Cuál es la especialidad de la casa?", en: "What's the house specialty?", tag: "food" },
+  { es: "¿Qué es esto?", en: "What is this?", tag: "food" },
+  { es: "Voy a pedir esto.", en: "I'll order this.", tag: "food" },
+  { es: "Para mí, el pollo, por favor.", en: "For me, the chicken, please.", tag: "food" },
+  { es: "¿Viene con algo más?", en: "Does it come with anything else?", tag: "food" },
+  { es: "Sin cebolla, por favor.", en: "No onion, please.", tag: "food" },
+  { es: "Soy alérgico a los mariscos.", en: "I'm allergic to shellfish.", tag: "food" },
+  { es: "No como carne.", en: "I don't eat meat.", tag: "food" },
+  { es: "¿Tienen opciones vegetarianas?", en: "Do you have vegetarian options?", tag: "food" },
+  { es: "Está delicioso.", en: "It's delicious.", tag: "food" },
+  { es: "¿Me lo puede traer para llevar?", en: "Can you make that to-go for me?", tag: "food" },
+
+  // Ordering drinks
+  { es: "¿Qué me recomienda para beber?", en: "What do you recommend to drink?", tag: "food" },
+  { es: "Una cerveza, por favor.", en: "A beer, please.", tag: "food" },
+  { es: "Una copa de vino tinto.", en: "A glass of red wine.", tag: "food" },
+  { es: "¿Tienen vino de la casa?", en: "Do you have house wine?", tag: "food" },
+  { es: "Agua con gas, por favor.", en: "Sparkling water, please.", tag: "food" },
+  { es: "Agua sin gas, por favor.", en: "Still water, please.", tag: "food" },
+  { es: "¿Me trae otra, por favor?", en: "Can you bring me another one, please?", tag: "food" },
+  { es: "Sin hielo, por favor.", en: "No ice, please.", tag: "food" },
+
+  // Asking for recommendations (general, not just food)
+  { es: "¿Qué me recomienda ver por aquí?", en: "What do you recommend I see around here?", tag: "travel" },
+  { es: "¿Conoce algún lugar bueno cerca de aquí?", en: "Do you know a good place nearby?", tag: "travel" },
+  { es: "¿Qué es lo más popular aquí?", en: "What's the most popular thing here?", tag: "food" },
+
+  // Calling the waiter / getting attention
+  { es: "Disculpe.", en: "Excuse me.", tag: "general" },
+  { es: "¿Me puede ayudar, por favor?", en: "Can you help me, please?", tag: "general" },
+
+  // The bill
+  { es: "La cuenta, por favor.", en: "The check, please.", tag: "food" },
+  { es: "¿Me trae la cuenta?", en: "Can you bring me the check?", tag: "food" },
+  { es: "¿Aceptan tarjeta?", en: "Do you accept card?", tag: "food" },
+  { es: "¿Está incluida la propina?", en: "Is the tip included?", tag: "food" },
+  { es: "¿Podemos pagar por separado?", en: "Can we pay separately?", tag: "food" },
+  { es: "Vamos a pagar juntos.", en: "We'll pay together.", tag: "food" },
+  { es: "Quédese con el cambio.", en: "Keep the change.", tag: "food" },
+  { es: "Todo estuvo muy rico, gracias.", en: "Everything was very good, thank you.", tag: "food" },
+];
+
+function buildSeedEntries(){
+  const now = Date.now();
+  return SEED_PHRASES.map((p, i) => ({
+    id: 'seed' + i + '_' + now,
+    es: p.es,
+    en: p.en,
+    tag: p.tag,
+    createdAt: new Date(now - (SEED_PHRASES.length - i) * 1000).toISOString(),
+  }));
+}
+
+async function loadEntries(){
+  try{
+    const raw = localStorage.getItem('lexicon-es-entries');
+    if(raw){
+      entries = JSON.parse(raw);
+    } else {
+      // First run — no stored data yet, preload restaurant essentials
+      entries = buildSeedEntries();
+      persistEntries();
+    }
+  } catch(e){
+    console.error('Load failed', e);
+    entries = buildSeedEntries();
+    persistEntries();
+  }
+  loaded = true;
+  renderList();
+}
+
+function persistEntries(){
+  try{
+    localStorage.setItem('lexicon-es-entries', JSON.stringify(entries));
+  } catch(e){
+    console.error('Storage save failed', e);
+    showToast('Save failed — storage may be full');
+  }
+}
+
+els.saveBtn.addEventListener('click', async () => {
+  const es = els.esInput.value.trim();
+  const en = els.enInput.value.trim();
+  if(!es) return;
+
+  const newEntry = {
+    id: 'e' + Date.now() + Math.random().toString(36).slice(2,7),
+    es, en, tag: currentTag,
     createdAt: new Date().toISOString(),
-  });
+  };
+  entries.unshift(newEntry);
+  persistEntries();
 
-  saveEntries();
-  els.phraseInput.value = '';
-  els.translationInput.value = '';
-  els.contextInput.value = '';
-  render();
-  els.phraseInput.focus();
+  els.esInput.value = '';
+  els.enInput.value = '';
+  autoGrow(els.esInput);
+  autoGrow(els.enInput);
+  validateForm();
+  showToast('Phrase saved ✓');
+  renderList();
 });
 
-els.searchInput.addEventListener('input', render);
-
-function deleteEntry(id){
+async function deleteEntry(id){
   entries = entries.filter(e => e.id !== id);
-  saveEntries();
-  render();
+  persistEntries();
+  renderList();
+  showToast('Removed');
 }
 
-function fmtDate(iso){
+function timeAgo(iso){
   const d = new Date(iso);
-  const now = new Date();
-  const isToday = d.toDateString() === now.toDateString();
-  const yesterday = new Date(now); yesterday.setDate(now.getDate()-1);
-  const isYesterday = d.toDateString() === yesterday.toDateString();
-  if(isToday) return 'Today';
-  if(isYesterday) return 'Yesterday';
-  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year: d.getFullYear() !== now.getFullYear() ? 'numeric' : undefined});
+  const diffMs = Date.now() - d.getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  if(diffMin < 1) return 'just now';
+  if(diffMin < 60) return diffMin + 'm ago';
+  const diffHr = Math.floor(diffMin / 60);
+  if(diffHr < 24) return diffHr + 'h ago';
+  const diffDay = Math.floor(diffHr / 24);
+  if(diffDay < 7) return diffDay + 'd ago';
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year: d.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined});
 }
 
-function tagLabel(tag){
-  return {vocab:'Vocab', heard:'Overheard', grammar:'Grammar', slang:'Slang'}[tag] || tag;
-}
-
-function render(){
+function renderList(){
   const query = els.searchInput.value.trim().toLowerCase();
-
   let filtered = entries;
-  if(activeFilter !== 'all'){
-    filtered = filtered.filter(e => e.tag === activeFilter);
+
+  if(currentFilter !== 'all'){
+    filtered = filtered.filter(e => e.tag === currentFilter);
   }
   if(query){
     filtered = filtered.filter(e =>
-      e.phrase.toLowerCase().includes(query) ||
-      (e.translation && e.translation.toLowerCase().includes(query)) ||
-      (e.context && e.context.toLowerCase().includes(query))
+      e.es.toLowerCase().includes(query) || e.en.toLowerCase().includes(query)
     );
   }
 
-  els.countBadge.textContent = entries.length + (entries.length === 1 ? ' PHRASE' : ' PHRASES');
+  els.entryCount.textContent = entries.length + (entries.length === 1 ? ' PHRASE' : ' PHRASES');
 
   if(entries.length === 0){
     els.statsCard.style.display = 'none';
   } else {
     els.statsCard.style.display = 'block';
-    const now = new Date();
-    const weekAgo = new Date(now); weekAgo.setDate(now.getDate()-7);
-    els.totalCount.textContent = entries.length;
-    els.weekCount.textContent = entries.filter(e => new Date(e.createdAt) >= weekAgo).length;
-    els.todayCount.textContent = entries.filter(e => new Date(e.createdAt).toDateString() === now.toDateString()).length;
+    renderStats();
   }
 
   if(filtered.length === 0){
-    els.entryList.innerHTML = '';
-    els.emptyState.style.display = 'block';
-    els.emptyState.querySelector('.msg').innerHTML = entries.length === 0
-      ? 'Your lexicon is empty.<br>Catch a phrase, write it down, repeat it later.'
-      : 'No phrases match.<br>Try a different search or filter.';
+    els.entriesList.innerHTML = `
+      <div class="empty-state">
+        <div class="ic">📝</div>
+        <div class="txt">${entries.length === 0 ? 'No phrases yet.<br>Write your first one above.' : 'No matches found.'}</div>
+      </div>`;
     return;
   }
-  els.emptyState.style.display = 'none';
 
-  els.entryList.innerHTML = filtered.map(e => `
+  els.entriesList.innerHTML = filtered.map(e => `
     <div class="entry">
-      <div class="entry-phrase">${escapeHtml(e.phrase)}</div>
-      ${e.translation ? `<div class="entry-translation">${escapeHtml(e.translation)}</div>` : ''}
-      ${e.context ? `<div class="entry-context">${escapeHtml(e.context)}</div>` : ''}
-      <div class="entry-meta">
-        <div class="entry-actions">
-          <span class="entry-tag ${e.tag}">${tagLabel(e.tag)}</span>
-          <span class="entry-date">${fmtDate(e.createdAt)}</span>
-        </div>
-        <button class="delete-btn" onclick="deleteEntry(${e.id})">DELETE</button>
+      <button class="del-btn" data-id="${e.id}">✕</button>
+      <div class="es">${escapeHtml(e.es)}</div>
+      ${e.en ? `<div class="en">${escapeHtml(e.en)}</div>` : ''}
+      <div class="meta">
+        <span class="tagchip">${e.tag}</span>
+        <span class="date">${timeAgo(e.createdAt)}</span>
       </div>
     </div>
   `).join('');
+
+  els.entriesList.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', () => deleteEntry(btn.dataset.id));
+  });
+}
+
+function renderStats(){
+  els.statTotal.textContent = entries.length;
+
+  const oneWeekAgo = Date.now() - 7*24*60*60*1000;
+  const weekCount = entries.filter(e => new Date(e.createdAt).getTime() > oneWeekAgo).length;
+  els.statWeek.textContent = weekCount;
+
+  // Day streak: count consecutive days (including today) with at least one entry
+  const daysWithEntries = new Set(entries.map(e => new Date(e.createdAt).toDateString()));
+  let streak = 0;
+  let cursor = new Date();
+  while(daysWithEntries.has(cursor.toDateString())){
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  els.statStreak.textContent = streak;
 }
 
 function escapeHtml(str){
@@ -385,7 +455,6 @@ function escapeHtml(str){
 }
 
 loadEntries();
-render();
 </script>
 
 </body>
